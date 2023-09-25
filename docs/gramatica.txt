@@ -1,0 +1,22 @@
+#alfabeto:
+{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, +, -, *, /, (, ) }
+
+#BNF:
+<expresion> ::= <termino> | <expresion>  <operador>  <termino> 
+<termino> ::= <factor> | <termino> <operador>  <factor> 
+<factor> ::= <numero> | ( <expresion> )
+<numero> ::= <digito> | <numero> <digito>
+<digito> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+<operador> ::= + |  - | * | /
+
+Casos de Prueba:
+2 + 3
+7 ( (4 - 1)
+5 / (6 + 2)
+8 - 4 (9 - 2)
+1 + 2 + 3 + 4
+7 * 8 / (5 - 2)
+3 * (2 + 1) -- 6
+(4 + 5)/ 2 - 1
+9 + 7 * (6 / 2)
+2 * (3 + 4) / (5 - 1))
