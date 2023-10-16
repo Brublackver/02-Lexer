@@ -33,7 +33,7 @@ int T(int estado_actual, int entrada) {//funcion del automata finito determinist
     /*6*/{1,-1,2,-1,-1},
     /*7*/{7,3,-1,-1,-1},
     /*8*/{8,9,-1,-1,-1},
-    /*9*/{1,-1,-1,-1,-1}
+    /*9*/{1,-1,2,-1,-1}
     }; 
   if (reconocedor_(entrada) == 2){parentesis(+1);}else if(reconocedor_(entrada) == 3){parentesis(-1);}
 
