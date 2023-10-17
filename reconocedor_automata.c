@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "reconocedor.h"
 
+
 int pertenece(char entrada,char lista[],int longitud_lista){//funcion para evaluar a que lenguaje peretenece cada caracter
     for (int i = 0; i < longitud_lista; i++) {
         if (entrada == lista[i]) {
@@ -8,7 +9,7 @@ int pertenece(char entrada,char lista[],int longitud_lista){//funcion para evalu
         }
     }
     return 0;
-}
+};
 int reconocedor_(char entrada) {// funcion que reconoce el alfabeto utilizado
    char digitos[] = {'0','1', '2', '3', '4', '5', '6', '7', '8', '9'};
    char operadores[] = {'+', '*', '-','/'};
@@ -36,7 +37,28 @@ int T(int estado_actual, int entrada) {//funcion del automata finito determinist
     /*9*/{1,-1,2,-1,-1}
     }; 
   if (reconocedor_(entrada) == 2){parentesis(+1);}else if(reconocedor_(entrada) == 3){parentesis(-1);}
-
+  if (estado_actual == -1){return -1;}
   return tabla[estado_actual][reconocedor_(entrada)];
 }
 
+char* auxTabla(char carac){
+    if (reconocedor_(carac)== 0){return "digito";}
+    else if (reconocedor_(carac)== 1){return "operador";}
+    else if(reconocedor_(carac)== 2 || reconocedor_(carac)== 3){return "carac. puntuacion";}
+    else{return "desconocido";}
+
+};
+
+void armarTablaTokens(char *leidos) {
+    int x = 0;
+    printf("--------------------\n \n");
+    printf("Tabla de tokens:\n \n");
+    printf("|| CARACTER ||    TOKEN             ||\n");
+    while (leidos[x] != '\0') {
+        char carac = leidos[x];
+ 
+        printf("||%10c||%20s", carac, auxTabla(carac));
+        printf("  ||\n");
+        x++;
+    }
+}
