@@ -6,13 +6,13 @@ int parentesis_control;//actua como pila para conotrolar el correcto uso de pare
 
 int parentesis(int valor){parentesis_control = parentesis_control + valor;};
 
-void procesarEntradaDeTexto(char *cadena) {//funcion que recibe archivo de texto y lee caracter por caracter
+void procesarEntradaDeTexto(char *cadena) {//funcion que recibe entrada y evalua caracter por caracter
    
     // Abre el archivo en modo lectura
     //FILE *archivo = fopen(nombreArchivo, "r");
 
 
-    //Si el archhivo no esta vacio, lee caracter por caracter
+    //Si la entrada no es vacia, lee caracter por caracter
     char leidos[100] = "" ;
     if (cadena == NULL || cadena[0] == '\0') {
         printf("Cadena vacía.\n");
@@ -55,10 +55,11 @@ void procesarEntradaDeTexto(char *cadena) {//funcion que recibe archivo de texto
             estado_actual = 0;
             parentesis_control = 0;
         };*/  
-        
+
         i++;
     int longitud = strlen(leidos);
 
+    //evalua que no es exceda el numero de caracteres permitidos
     if (longitud < sizeof(leidos) - 1) {
         leidos[longitud] = caracter;
         leidos[longitud + 1] = '\0'; 
@@ -68,16 +69,17 @@ void procesarEntradaDeTexto(char *cadena) {//funcion que recibe archivo de texto
         
 
     };
+  
     armarTablaTokens(leidos);
     //fclose(archivo);
     return;
 };
 
-int main() {//funcion main, define el archivo de texto a leer
+int main() {//funcion main, pide al usuario una entrada por consola
     //Por ahora, comento todo lo que tenga que ver con manejo de archivos por que todavia no es claro el formato del flujo de entrada
     parentesis_control = 0;
     char cadena[100]; 
-    printf("Ingresa una cadena de caracteres: ");
+    printf("Ingresa una expresion numerica valida, sin dejar espacios en blanco: ");
     fgets(cadena, sizeof(cadena), stdin);
    // const char *nombreArchivo = "textoo.txt"; // archivo de prueba
     procesarEntradaDeTexto(cadena);
