@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "reconocedor.h"
 
-
+int lector_estado =0;
 int pertenece(char entrada,char lista[],int longitud_lista){//funcion para evaluar a que lenguaje peretenece cada caracter
     for (int i = 0; i < longitud_lista; i++) {
         if (entrada == lista[i]) {
@@ -32,7 +32,7 @@ int T(int estado_actual, int entrada) {//funcion del automata finito determinist
     /*4*/{4,3,-1,5,-1},
     /*5*/{-1,3,-1,5,-1},
     /*6*/{1,-1,2,-1,-1},
-    /*7*/{7,3,-1,-1,-1},
+    /*7*/{7,3,-1,5,-1},
     /*8*/{8,9,-1,-1,-1},
     /*9*/{1,-1,2,-1,-1}
     }; 
@@ -41,6 +41,7 @@ int T(int estado_actual, int entrada) {//funcion del automata finito determinist
   return tabla[estado_actual][reconocedor_(entrada)];
 }
 
+//auxiliar para reconocer token
 char* auxTabla(char carac){
     if (reconocedor_(carac)== 0){return "digito";}
     else if (reconocedor_(carac)== 1){return "operador";}
@@ -49,6 +50,7 @@ char* auxTabla(char carac){
 
 };
 
+//imprime tabla de tokens
 void armarTablaTokens(char *leidos) {
     int x = 0;
     printf("--------------------\n \n");
@@ -56,9 +58,26 @@ void armarTablaTokens(char *leidos) {
     printf("|| CARACTER ||    TOKEN             ||\n");
     while (leidos[x] != '\0') {
         char carac = leidos[x];
- 
         printf("||%10c||%20s", carac, auxTabla(carac));
         printf("  ||\n");
         x++;
     }
 }
+/*
+void lectorErrores(char *leidos){
+    int z = 0;
+    char cadenaErronea[100] = "" ;
+    int longitud = sizeof(cadenaErronea);
+
+        if (*leidos == '\0') {return;}
+        while(lector_estado != -1){
+        lector_estado == T(lector_estado,leidos[z]);
+        cadenaErronea[longitud] = leidos[z];
+        z++;
+        };
+        struct error error_nuevo =  nuevoError(cadenaErronea);
+        agregarError(error_nuevo);
+        lectorErrores(leidos + 1);
+        
+    }
+*/
