@@ -6,9 +6,13 @@ MATERIA: Sintaxis y Semántica de los lenguajes
 
 CURSO: K2152
 
-INTEGRANTES: 
+INTEGRANTES:
+
 Anchart, Aylén Daiana
+
 Pardo Ares, Matías
+
 Opderbeck, Sebastián
+
 Seniow, Bautista
 
