@@ -2,10 +2,10 @@
 #include "reconocedor2.h"
 
 
-int T2(int estado_actual, int entrada) {//funcion del automata finito deterministico,(tabla de transiciones)
+int T2(int estado_actual, char entrada) {//funcion del automata finito deterministico,(tabla de transiciones)
   
     int tabla[10][5] = {
-    /*0*/{1,1,1.2},
+    /*0*/{1,1,1,2},
     /*1*/{1,1,1,2},
    /*2*/{2,2,2,2}
     }; 
@@ -59,7 +59,7 @@ void armarTablaTokens2(char *leidos) {
     }
 }
 
-void lectorErrores(char *leidos){
+void lectorErrores2(char *leidos){
 int z = 0;
 printf("ERRORES ENCONTRADOS:   \n");
 

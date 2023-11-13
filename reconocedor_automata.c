@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include "reconocedor.h"
+#include "reconocedor_automata2.c"
 
 int lector_estado =0;
+
 int pertenece(char entrada,char lista[],int longitud_lista){//funcion para evaluar a que lenguaje peretenece cada caracter
     for (int i = 0; i < longitud_lista; i++) {
         if (entrada == lista[i]) {
@@ -9,7 +11,8 @@ int pertenece(char entrada,char lista[],int longitud_lista){//funcion para evalu
         }
     }
     return 0;
-};
+}
+
 int reconocedor_(char entrada) {// funcion que reconoce el alfabeto utilizado
    char digitos[] = {'0','1', '2', '3', '4', '5', '6', '7', '8', '9'};
    char operadores[] = {'+', '*', '-','/'};
@@ -22,7 +25,7 @@ int reconocedor_(char entrada) {// funcion que reconoce el alfabeto utilizado
    else{return 4;}
 }
 
-int T(int estado_actual, int entrada) {//funcion del automata finito deterministico,(tabla de transiciones)
+int T(int estado_actual, char entrada) {//funcion del automata finito deterministico,(tabla de transiciones)
   
     int tabla[10][5] = {
     /*0*/{8,-1,2,-1,-1},
@@ -36,7 +39,7 @@ int T(int estado_actual, int entrada) {//funcion del automata finito determinist
     /*8*/{8,9,-1,-1,-1},
     /*9*/{1,-1,2,-1,-1}
     }; 
-  if (reconocedor_(entrada) == 2){parentesis(+1);}else if(reconocedor_(entrada) == 3){parentesis(-1);}
+  if (reconocedor_(entrada) == 2){parentesis_control +=1;}else if(reconocedor_(entrada) == 3){parentesis_control -=1;}
   if (estado_actual == -1){return -1;}
   return tabla[estado_actual][reconocedor_(entrada)];
 }
@@ -51,7 +54,7 @@ char* auxTabla(char carac){
 };
 
 //imprime tabla de tokens
-void armarTablaTokens(char *leidos) {
+void armarTablaTokens(char* leidos) {
     int x = 0;
     printf("--------------------\n \n");
     printf("Tabla de tokens:\n \n");
@@ -63,7 +66,6 @@ void armarTablaTokens(char *leidos) {
         x++;
     }
 }
-/*
 void lectorErrores(char *leidos){
     int z = 0;
     char cadenaErronea[100] = "" ;
@@ -71,7 +73,7 @@ void lectorErrores(char *leidos){
 
         if (*leidos == '\0') {return;}
         while(lector_estado != -1){
-        lector_estado == T(lector_estado,leidos[z]);
+        lector_estado = T(lector_estado,leidos[z]);
         cadenaErronea[longitud] = leidos[z];
         z++;
         };
@@ -80,4 +82,20 @@ void lectorErrores(char *leidos){
         lectorErrores(leidos + 1);
         
     }
-*/
+
+    #include <stdio.h>
+#include <string.h>
+#include "reconocedor.h"
+
+struct error nuevoError(const char *mensaje) {
+    struct error nuevo;
+    strncpy(nuevo.mensaje, mensaje, sizeof(nuevo.mensaje) - 1);
+    nuevo.mensaje[sizeof(nuevo.mensaje) - 1] = '\0';
+    return nuevo;
+}
+
+void agregarError(struct error err) {
+    // Puedes implementar la lógica para manejar el error aquí.
+    // Por ejemplo, imprimirlo en la consola.
+    printf("Error: %s\n", err.mensaje);
+}

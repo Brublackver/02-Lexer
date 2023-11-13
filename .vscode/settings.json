@@ -2,6 +2,7 @@
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
         "stdio.h": "c",
-        "reconocedor.h": "c"
+        "reconocedor.h": "c",
+        "reconocedor2.h": "c"
     }
 }
